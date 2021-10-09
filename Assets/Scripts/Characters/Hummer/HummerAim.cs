@@ -13,6 +13,8 @@ namespace HelicopterAttack.Characters.Hummer
 
         private CharacterGroup _target;
 
+        private Vector3 _lastTargetPosition;
+
         public override float DistanceToTarget 
         {
             get 
@@ -56,7 +58,12 @@ namespace HelicopterAttack.Characters.Hummer
 
         public override Vector3 GetTargetPosition ()
         {
-            return _target == null ? Vector3.zero : _target.Bounds.center;
+            if (_target != null)
+            {
+                _lastTargetPosition = _target.Bounds.center;
+            }
+
+            return _lastTargetPosition;
         }
     }
 }

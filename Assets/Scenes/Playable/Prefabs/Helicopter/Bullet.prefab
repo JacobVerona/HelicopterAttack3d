@@ -109,43 +109,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1114010647414350076}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e12d6121f1c78dc478c8ab7329a6edcf, type: 3}
+  m_Script: {fileID: 11500000, guid: b4fbb9a3ad321a8469d3514fe62352b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _velocity:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: -0.42780685
-      outSlope: -0.42780685
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.12094427
-    - serializedVersion: 3
-      time: 0.58442265
-      value: -0.28195465
-      inSlope: -0.535197
-      outSlope: -0.535197
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.20161638
-    - serializedVersion: 3
-      time: 1
-      value: -1
-      inSlope: -4.7647047
-      outSlope: -4.7647047
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.12752663
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 1
-    m_RotationOrder: 4
+  _group: {fileID: 0}
   _flyPower: 0.1
+  Damage: 15
 --- !u!65 &7613243255228644862
 BoxCollider:
   m_ObjectHideFlags: 0

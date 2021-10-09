@@ -15,7 +15,7 @@ namespace HelicopterAttack.Characters.General.AI
             PatrolCenterPosition = centerPoint;
             PatrolRadius = patrolRadius;
 
-            UpdatePatrolPosition(centerPoint, 0);
+            UpdatePatrolPosition(centerPoint, 10000000f);
         }
 
         public Vector3 PatrolCenterPosition { get; set; }

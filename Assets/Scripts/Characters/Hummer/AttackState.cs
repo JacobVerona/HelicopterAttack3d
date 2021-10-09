@@ -23,6 +23,8 @@ namespace HelicopterAttack.Characters.Hummer
         
         private readonly YieldInstruction _waitTime = new WaitForSeconds(1f);
 
+        public float _shootCoolDown = 0.25f;
+
         protected override void OnEntry ()
         {
             StartCoroutine(nameof(AITick));
@@ -49,12 +51,7 @@ namespace HelicopterAttack.Characters.Hummer
                     break;
                 }
 
-                for (int i = 0; i < 3; i++)
-                {
-                    _gun.TryShoot(_vision.GetTargetPosition());
-                    yield return new WaitForSeconds(0.25f);
-                }
-
+                _gun.TryShoot(_vision.GetTargetPosition());
 
                 yield return _waitTime;
             }

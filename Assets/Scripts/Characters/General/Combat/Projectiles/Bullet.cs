@@ -11,6 +11,8 @@ namespace HelicopterAttack.Characters.General.Combat
         [SerializeField]
         private float _flyPower;
 
+        public float Damage = 1f;
+
         public void Constructor(CharacterGroup ownerGroup)
         {
             _group = ownerGroup;
@@ -24,9 +26,16 @@ namespace HelicopterAttack.Characters.General.Combat
 
         private void OnCollisionEnter(Collision other)
         {
-            if (other.gameObject.TryGetComponent(out IBulletObstacable obstacle))
+            if (other.gameObject.TryGetComponent(out CharacterGroup group)
+                && _group.IsFiendly(group))
             {
-                obstacle.Hit(this);
+                return;
+            }
+
+            if (other.gameObject.TryGetComponent(out IBulletObstacleable obstacle))
+            {
+                obstacle.OnHit(this);
+                Destroy(gameObject);
             }
         }
     }

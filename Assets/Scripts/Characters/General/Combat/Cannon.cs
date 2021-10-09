@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using HelicopterAttack.Characters.General.Groups;
+using UnityEngine;
 
 namespace HelicopterAttack.Characters.General.Combat
 {
@@ -8,6 +9,9 @@ namespace HelicopterAttack.Characters.General.Combat
 
         [SerializeField]
         private CharacterAim _aim;
+
+        [SerializeField]
+        private CharacterGroup _group;
 
         [SerializeField]
         private Bullet _bulletPrefab;
@@ -39,6 +43,7 @@ namespace HelicopterAttack.Characters.General.Combat
             }
 
             var bullet = Instantiate(_bulletPrefab, _firePoint.position, Quaternion.identity);
+            bullet.Constructor(_group);
             bullet.transform.forward = position - bullet.transform.position;
         }
 
