@@ -1,13 +1,15 @@
 ﻿using Characters.RPG;
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace HelicopterAttack.Characters
 {
-    public class Character : MonoBehaviour
+    public class CharacterHealth : MonoBehaviour
     {
-        public event Action Spawned;
         public event Action Died;
+
+        public UnityEvent<Damage> Damaged;
 
         [SerializeField]
         private float _startHealth;
@@ -18,7 +20,7 @@ namespace HelicopterAttack.Characters
         private void Awake()
         {
             MaxHealth.AddValue(_startHealth, CharacterAttribute.ValueModifier.Base);
-            Health.AddValue(MaxHealth.Value, CharacterAttribute.ValueModifier.Base);
+            Health.AddValue(_startHealth, CharacterAttribute.ValueModifier.Base);
         }
 
         private void OnEnable()
@@ -31,11 +33,18 @@ namespace HelicopterAttack.Characters
             Health.ValueChanged -= OnHealthChanged;
         }
 
+        public void DealDamage(Damage damage)
+        {
+            damage.Deal(Health);
+            Damaged?.Invoke(damage);
+        }
+
         private void OnHealthChanged(float health)
         {
             if (health <= 0f)
             {
                 Died?.Invoke();
+                Destroy(gameObject);
             }
         }
     }

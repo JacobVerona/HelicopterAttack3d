@@ -24,17 +24,6 @@ namespace HelicopterAttack.Characters.General.Combat
 
         private bool _isReadyToShoot;
 
-        private float AngleBetweenSelfTarget
-        {
-            get
-            {
-                Vector3 rotationDirection = _aim.GetTargetPosition() - transform.position;
-
-                return Vector2.SignedAngle(new Vector2(rotationDirection.x, rotationDirection.z),
-                    new Vector2(transform.forward.x, transform.forward.z));
-            }
-        }
-
         public override void TryShoot (Vector3 position)
         {
             if (_isReadyToShoot == false)
@@ -49,22 +38,30 @@ namespace HelicopterAttack.Characters.General.Combat
 
         public void Update ()
         {
-            if (_aim.IsTargetVisible() == false)
-            {
-                return;
-            }
+            float angle = 0f;
+            _aim.FindNearestTarget(out CharacterGroup target);
 
-            float angle = AngleBetweenSelfTarget;
+            angle = _aim.IsTargetVisible() == false ?
+                AngleBetweenSelfTarget(_aim.transform.position) : AngleBetweenSelfTarget(_aim.GetTargetPosition());
 
             RotateHead(angle);
 
             _isReadyToShoot = Mathf.Abs(angle) <= AngleFieldOfView;
         }
 
+        private float AngleBetweenSelfTarget(Vector3 targetPosition)
+        {
+            Vector3 rotationDirection = targetPosition - transform.position;
+
+            return Vector2.SignedAngle(new Vector2(rotationDirection.x, rotationDirection.z),
+                new Vector2(transform.forward.x, transform.forward.z));
+
+        }
+
         private void RotateHead (float angle)
         {
-            transform.rotation = Quaternion.RotateTowards(transform.rotation,
-               Quaternion.Euler(transform.eulerAngles + new Vector3(0, angle, 0)), _rotationSpeed * Time.deltaTime);
+            transform.localRotation = Quaternion.RotateTowards(transform.localRotation,
+               Quaternion.Euler(transform.localEulerAngles + new Vector3(0, angle, 0)), _rotationSpeed * Time.deltaTime);
         }
     }
 }

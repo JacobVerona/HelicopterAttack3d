@@ -259,6 +259,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e547f5b7c40ac046a31d85c9c56c6aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Damaged:
+    m_PersistentCalls:
+      m_Calls: []
   _startHealth: 100
 --- !u!114 &4506623142456964681
 MonoBehaviour:
@@ -272,7 +275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6488e3c7ea94c204396aa495b834d98a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _characterStats: {fileID: 8496991793957090056}
+  _character: {fileID: 8496991793957090056}
 --- !u!1 &6395747437188352261
 GameObject:
   m_ObjectHideFlags: 0

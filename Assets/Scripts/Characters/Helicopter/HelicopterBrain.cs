@@ -1,3 +1,4 @@
+using HelicopterAttack.Characters.General.Combat;
 using HelicopterAttack.Characters.General.Groups;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,7 +16,7 @@ namespace HelicopterAttack.Characters.Helicopter
         private HelicopterMovement _movement;
 
         [SerializeField]
-        private HelicopterCannon _combat;
+        private CharacterGun _combat;
 
         [SerializeField]
         private HelicopterAim _aim;
@@ -35,12 +36,12 @@ namespace HelicopterAttack.Characters.Helicopter
         {
             _inputMap.Enable();
 
-            _inputMap.Main.Attack.performed += ctx => { OnAttack(); };
+            _inputMap.Main.Attack.performed += OnAttack;
         }
 
         protected virtual void OnDisable ()
         {
-            _inputMap.Main.Attack.performed -= ctx => { OnAttack(); };
+            _inputMap.Main.Attack.performed -= OnAttack;
         }
 
         protected virtual void Update ()
@@ -52,7 +53,7 @@ namespace HelicopterAttack.Characters.Helicopter
             _movement.Rotate(rotationInput);
         }
 
-        private void OnAttack ()
+        private void OnAttack (UnityEngine.InputSystem.InputAction.CallbackContext context)
         {
             if (Physics.Raycast(transform.position, _crosshair.transform.position - transform.position, out RaycastHit hit))
             {

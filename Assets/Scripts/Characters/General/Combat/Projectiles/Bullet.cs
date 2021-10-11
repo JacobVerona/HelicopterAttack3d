@@ -3,15 +3,25 @@ using UnityEngine;
 
 namespace HelicopterAttack.Characters.General.Combat
 {
+    [RequireComponent(typeof(Rigidbody))]
     public class Bullet : MonoBehaviour
     {
+        [SerializeField]
+        private ParticleSystem _explosion;
+
         [SerializeField]
         private CharacterGroup _group;
 
         [SerializeField]
         private float _flyPower;
 
-        public float Damage = 1f;
+        [SerializeField]
+        private float _damage;
+
+        public Damage Damage
+        {
+            get => new Damage() { Owner = _group, Value = _damage };
+        }
 
         public void Constructor(CharacterGroup ownerGroup)
         {
@@ -35,6 +45,8 @@ namespace HelicopterAttack.Characters.General.Combat
             if (other.gameObject.TryGetComponent(out IBulletObstacleable obstacle))
             {
                 obstacle.OnHit(this);
+                Instantiate(_explosion, transform.position, Quaternion.identity);
+
                 Destroy(gameObject);
             }
         }

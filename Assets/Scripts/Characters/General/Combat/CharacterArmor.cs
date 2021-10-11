@@ -1,18 +1,17 @@
-﻿using Characters.RPG;
-using HelicopterAttack.Characters.General.Combat;
+﻿using HelicopterAttack.Characters.General.Combat;
 using UnityEngine;
 
 namespace HelicopterAttack.Characters
 {
-    [RequireComponent(typeof(Character))]
+    [RequireComponent(typeof(CharacterHealth))]
     public class CharacterArmor : MonoBehaviour, IBulletObstacleable
     {
         [SerializeField]
-        private Character _characterStats;
+        private CharacterHealth _character;
 
-        public void OnHit(Bullet bullet)
+        public virtual void OnHit(Bullet bullet)
         {
-            _characterStats.Health.AddValue(-bullet.Damage, CharacterAttribute.ValueModifier.Base);
+            _character.DealDamage(bullet.Damage);
         }
     }
 }

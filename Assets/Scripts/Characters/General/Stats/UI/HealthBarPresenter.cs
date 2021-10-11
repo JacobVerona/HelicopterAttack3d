@@ -9,9 +9,9 @@ namespace HelicopterAttack.Characters
         private Slider _slider;
 
         [SerializeField]
-        private Character _target;
+        private CharacterHealth _target;
 
-        public void Constuctor(Character target)
+        public void Constuctor(CharacterHealth target)
         {
             _target = target;
             enabled = true;

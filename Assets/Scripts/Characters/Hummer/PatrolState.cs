@@ -15,14 +15,13 @@ namespace HelicopterAttack.Characters.Hummer
         [SerializeField]
         private NavMeshAgent _agent;
 
-        private PatrolPath _patrolPath;
-
         [SerializeField]
         private HummerAim _vision;
 
         [SerializeField]
         private float _patrolRadius = 10f;
 
+        private PatrolPath _patrolPath;
         private readonly YieldInstruction _waitTime = new WaitForSeconds(1f);
 
         private float _chachedStoppingDistance;
@@ -64,7 +63,6 @@ namespace HelicopterAttack.Characters.Hummer
                 yield return _waitTime;
             }
         }
-
     }
 }
 
