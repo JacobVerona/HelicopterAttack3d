@@ -1,4 +1,4 @@
-﻿namespace Characters.StateMachine
+﻿namespace HelicopterAttack.StateMachine
 {
     public interface IStateable
     {

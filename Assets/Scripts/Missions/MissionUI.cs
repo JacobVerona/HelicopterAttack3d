@@ -19,12 +19,12 @@ namespace HelicopterAttack.Missions
 
         private void OnEnable()
         {
-            _mission.GoalsCountChanged += UpdateUIText;
+            _mission.TargetGoalsCountChanged += UpdateUIText;
         }
 
         private void OnDisable()
         {
-            _mission.GoalsCountChanged -= UpdateUIText;
+            _mission.TargetGoalsCountChanged -= UpdateUIText;
         }
 
         private void UpdateUIText()

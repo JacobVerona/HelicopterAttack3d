@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace HelicopterAttack.Missions
 {
-    public class DestructGoal : GoalTarget
+    public class DestructGoal : TargetGoal
     {
-        public override event Action<GoalTarget> Completed;
+        public override event Action<TargetGoal> Completed;
 
         [SerializeField]
         private CharacterHealth _targetHealth;

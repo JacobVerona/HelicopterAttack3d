@@ -1,6 +1,5 @@
-using Characters.StateMachine;
+using HelicopterAttack.StateMachine;
 using UnityEngine;
-using UnityEngine.AI;
 
 namespace HelicopterAttack.Characters.General.AI
 {

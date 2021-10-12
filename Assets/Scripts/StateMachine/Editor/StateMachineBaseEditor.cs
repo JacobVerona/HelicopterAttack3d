@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace Characters.StateMachine.Editor
+namespace HelicopterAttack.StateMachine.Editor
 {
     [CustomEditor(typeof(StateMachineBase), true)]
     public class StateMachineBaseEditor : UnityEditor.Editor

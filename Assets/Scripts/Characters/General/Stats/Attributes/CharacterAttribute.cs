@@ -1,4 +1,4 @@
-﻿namespace Characters.RPG
+﻿namespace HelicopterAttack.RPG
 {
     public class CharacterAttribute
     {

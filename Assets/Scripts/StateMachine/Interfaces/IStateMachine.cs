@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Characters.StateMachine
+﻿namespace HelicopterAttack.StateMachine
 {
     public interface IStateMachine
     {

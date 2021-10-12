@@ -7,22 +7,22 @@ namespace HelicopterAttack.Missions
 {
     public sealed class Mission : MonoBehaviour
     {
-        public UnityEvent<GoalTarget> GoalCompleted;
+        public UnityEvent<TargetGoal> GoalCompleted;
         public UnityEvent MissionCompleted;
 
-        public event Action GoalsCountChanged; 
+        public event Action TargetGoalsCountChanged; 
 
         [SerializeField]
-        private List<GoalTarget> _goalTargets;
+        private List<TargetGoal> _targetGoal;
 
-        private List<GoalTarget> _completedGoals = new List<GoalTarget>();
-
-        public IEnumerable<GoalTarget> Goals { get => _goalTargets; }
-        public IEnumerable<GoalTarget> CompletedGoals { get => _completedGoals; }
+        private List<TargetGoal> _completedGoals = new List<TargetGoal>();
+        
+        public IEnumerable<TargetGoal> Goals { get => _targetGoal; }
+        public IEnumerable<TargetGoal> CompletedGoals { get => _completedGoals; }
 
         private void OnEnable()
         {
-            foreach (var goalTarget in _goalTargets)
+            foreach (var goalTarget in _targetGoal)
             {
                 goalTarget.Completed += OnGoalCompleted;
             }
@@ -30,30 +30,30 @@ namespace HelicopterAttack.Missions
 
         private void OnDisable()
         {
-            foreach (var goalTarget in _goalTargets)
+            foreach (var goalTarget in _targetGoal)
             {
                 goalTarget.Completed -= OnGoalCompleted;
             }
         }
 
-        public void RegisterTarget(GoalTarget target)
+        public void RegisterTarget(TargetGoal target)
         {
-            _goalTargets.Add(target);
+            _targetGoal.Add(target);
             target.Completed += OnGoalCompleted;
-            GoalsCountChanged?.Invoke();
+            TargetGoalsCountChanged?.Invoke();
         }
 
-        private void OnGoalCompleted(GoalTarget target)
+        private void OnGoalCompleted(TargetGoal target)
         {
-            _goalTargets.Remove(target);
+            _targetGoal.Remove(target);
             _completedGoals.Add(target);
             GoalCompleted?.Invoke(target);
 
-            if (_goalTargets.Count <= 0)
+            if (_targetGoal.Count <= 0)
             {
                 MissionCompleted?.Invoke();
             }
-            GoalsCountChanged?.Invoke();
+            TargetGoalsCountChanged?.Invoke();
         }
     }
 }
