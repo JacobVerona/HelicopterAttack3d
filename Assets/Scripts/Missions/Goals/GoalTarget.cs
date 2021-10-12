@@ -6,5 +6,7 @@ namespace HelicopterAttack.Missions
     public abstract class GoalTarget : MonoBehaviour
     {
         public abstract event Action<GoalTarget> Completed;
+
+        public abstract string Description { get; }
     }
 }

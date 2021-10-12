@@ -9,7 +9,9 @@ namespace HelicopterAttack.Missions
         public override event Action<GoalTarget> Completed;
 
         [SerializeField]
-        private CharacterHealth _targetHealth; 
+        private CharacterHealth _targetHealth;
+
+        public override string Description => "missions_goal_destruct";
 
         protected virtual void OnEnable()
         {
