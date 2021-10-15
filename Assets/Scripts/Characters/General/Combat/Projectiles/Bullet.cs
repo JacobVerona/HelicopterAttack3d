@@ -8,9 +8,6 @@ namespace HelicopterAttack.Characters.General.Combat
     public class Bullet : MonoBehaviour
     {
         [SerializeField]
-        private ParticleSystem _explosion;
-
-        [SerializeField]
         private SpaceFloatEvent _explosionEvent;
 
         [SerializeField]
@@ -21,6 +18,9 @@ namespace HelicopterAttack.Characters.General.Combat
 
         [SerializeField]
         private float _damage;
+
+        [SerializeField]
+        private float _explosionPower;
 
         public Damage Damage
         {
@@ -49,9 +49,8 @@ namespace HelicopterAttack.Characters.General.Combat
             if (other.gameObject.TryGetComponent(out IBulletObstacleable obstacle))
             {
                 obstacle.OnHit(this);
-                Instantiate(_explosion, transform.position, Quaternion.identity);
-                _explosionEvent.Invoke(new SpaceEventData(transform.position, _damage / 2.5f));
-
+                _explosionEvent.Invoke(new SpaceEventData(transform.position, _explosionPower));
+                
                 Destroy(gameObject);
             }
         }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace HelicopterAttack.Global
 {
-    public class GlobalEvent<T> : ScriptableObject
+    public class GlobalEvent<T> : GlobalEvent
     {
         [SerializeField]
         private event Action<T> _event;
@@ -23,4 +23,6 @@ namespace HelicopterAttack.Global
             _event?.Invoke(data);
         }
     }
+
+    public abstract class GlobalEvent : ScriptableObject { }
 }

@@ -1,7 +1,5 @@
 ﻿using Cinemachine;
-using HelicopterAttack.Global;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace HelicopterAttack.Characters
@@ -12,10 +10,7 @@ namespace HelicopterAttack.Characters
         private CinemachineBasicMultiChannelPerlin _perlin;
 
         [SerializeField]
-        private List<SpaceFloatEvent> _shakeEvents;
-
-        [SerializeField]
-        private float _amplitudeGainPower = 5f;
+        private float _amplitudeGainPower = 1f;
 
         [SerializeField]
         private float _normalizedSpeed = 10f;
@@ -25,21 +20,6 @@ namespace HelicopterAttack.Characters
         private void Awake()
         {
             _perlin = GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
-        }
-
-        private void OnEnable()
-        {
-            _shakeEvents.ForEach(e => e.AddListener(OnExplosion));
-        }
-
-        private void OnDisable()
-        {
-            _shakeEvents.ForEach(e => e.RemoveListener(OnExplosion));
-        }
-
-        private void OnExplosion(SpaceEventData data)
-        {
-            Shake(data.parameter);
         }
 
         public void Shake(float power)
@@ -55,7 +35,7 @@ namespace HelicopterAttack.Characters
 
         private IEnumerator ShakeCoroutine(float power)
         {
-            _perlin.m_AmplitudeGain = power;
+            _perlin.m_AmplitudeGain = power * _amplitudeGainPower;
             yield return new WaitUntil(() =>
             {
                 _perlin.m_AmplitudeGain = Mathf.Lerp(_perlin.m_AmplitudeGain, 0, Time.deltaTime * _normalizedSpeed);

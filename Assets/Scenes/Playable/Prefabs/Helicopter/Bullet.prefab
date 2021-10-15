@@ -113,11 +113,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4fbb9a3ad321a8469d3514fe62352b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _explosion: {fileID: 2454743337380230940, guid: 6c20ccd985106a749878ae56a937bd76, type: 3}
   _explosionEvent: {fileID: 11400000, guid: 0ae910b3b7966bf4291d724ef644a9aa, type: 2}
   _group: {fileID: 0}
   _flyPower: 0.25
   _damage: 20
+  _explosionPower: 1
 --- !u!65 &7613243255228644862
 BoxCollider:
   m_ObjectHideFlags: 0
