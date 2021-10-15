@@ -11,22 +11,7 @@ namespace HelicopterAttack.Characters.Hummer
         [SerializeField]
         private CharacterGroup _group;
 
-        private CharacterGroup _target;
-
         private Vector3 _lastTargetPosition;
-
-        public override float DistanceToTarget 
-        {
-            get 
-            {
-                if (_target == null)
-                {
-                    return 1000000000000f;
-                }
-
-                return Vector3.Distance(transform.position, _target.Bounds.ClosestPoint(transform.position));
-            }
-        }
 
         public override bool FindNearestTarget (out CharacterGroup enemy)
         {
@@ -40,7 +25,7 @@ namespace HelicopterAttack.Characters.Hummer
                     if (findedEnemy.gameObject != gameObject
                         && _group.IsAggressive(findedEnemy))
                     {
-                        _target = findedEnemy;
+                        Target = findedEnemy;
                         enemy = findedEnemy;
                         return true;
                     }
@@ -53,14 +38,14 @@ namespace HelicopterAttack.Characters.Hummer
 
         public override bool IsTargetVisible ()
         {
-            return _target != null && DistanceToTarget < ViewRadius;
+            return Target != null && DistanceToTarget < ViewRadius;
         }
 
         public override Vector3 GetTargetPosition ()
         {
-            if (_target != null)
+            if (Target != null)
             {
-                _lastTargetPosition = _target.Bounds.center;
+                _lastTargetPosition = Target.Bounds.center;
             }
 
             return _lastTargetPosition;

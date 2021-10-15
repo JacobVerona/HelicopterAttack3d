@@ -9,21 +9,6 @@ namespace HelicopterAttack.Characters.Helicopter
         [SerializeField]
         private float _findTargetDistance = 5f;
 
-        [SerializeField]
-        private CharacterGroup _target;
-
-        public override float DistanceToTarget 
-        {
-            get 
-            {
-                if (_target == null)
-                {
-                    return 1000000000000f;
-                }
-
-                return Vector3.Distance(transform.position, _target.Bounds.ClosestPoint(transform.position));
-            }
-        }
 
         public override bool FindNearestTarget (out CharacterGroup enemy)
         {
@@ -43,20 +28,20 @@ namespace HelicopterAttack.Characters.Helicopter
                     }
                 }
             }
-            _target = nearestEnemy;
+            Target = nearestEnemy;
 
-            enemy = _target;
+            enemy = Target;
             return nearestEnemy != null;
         }
 
         public override Vector3 GetTargetPosition ()
         {
-            return _target == null ? Vector3.zero : _target.transform.position;
+            return Target == null ? Vector3.zero : Target.Bounds.ClosestPoint(transform.position);
         }
 
         public override bool IsTargetVisible ()
         {
-            return _target != null && DistanceToTarget <= _findTargetDistance;
+            return Target != null && DistanceToTarget <= _findTargetDistance;
         }
 
 #if UNITY_EDITOR
