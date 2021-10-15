@@ -114,6 +114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _explosion: {fileID: 2454743337380230940, guid: 6c20ccd985106a749878ae56a937bd76, type: 3}
+  _explosionEvent: {fileID: 11400000, guid: 0ae910b3b7966bf4291d724ef644a9aa, type: 2}
   _group: {fileID: 0}
   _flyPower: 0.25
   _damage: 20

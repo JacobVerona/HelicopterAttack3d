@@ -54,8 +54,9 @@ namespace HelicopterAttack.Singleton
 
         public virtual void Awake()
         {
-            if (_instance == null)
+            if (_instance != null)
             {
+                Destroy(this);
                 return;
             }
 

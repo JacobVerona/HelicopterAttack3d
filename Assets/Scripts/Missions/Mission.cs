@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using HelicopterAttack.StateMachine;
+using HelicopterAttack.Characters;
+using HelicopterAttack.Characters.General.Groups;
 
 namespace HelicopterAttack.Missions
 {
@@ -54,6 +57,49 @@ namespace HelicopterAttack.Missions
                 MissionCompleted?.Invoke();
             }
             TargetGoalsCountChanged?.Invoke();
+        }
+    }
+
+    public class GameStateMachine : StateMachine<GameState>
+    {
+        private void Awake()
+        {
+            DontDestroyOnLoad(gameObject);
+        }
+
+        protected override void ConfigureState(in GameState state)
+        {
+            
+        }
+    }
+
+    public class GameState : MonoState
+    {
+
+    }
+
+    public class PlayState : GameState
+    {
+        [SerializeField]
+        private Player _player;
+
+
+    }
+
+    public class Player : MonoBehaviour
+    {
+        [SerializeField]
+        private CameraFXShake _fxShake;
+
+        [SerializeField]
+        private CharacterGroup _characterGroup;
+
+        public CameraFXShake FXShake { get => _fxShake; }
+        public CharacterGroup CharacterGroup { get => _characterGroup; }
+
+        public void CreatePlayer()
+        {
+
         }
     }
 }

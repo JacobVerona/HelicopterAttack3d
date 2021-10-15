@@ -1,4 +1,5 @@
 using HelicopterAttack.Characters.General.Groups;
+using HelicopterAttack.Global;
 using UnityEngine;
 
 namespace HelicopterAttack.Characters.General.Combat
@@ -8,6 +9,9 @@ namespace HelicopterAttack.Characters.General.Combat
     {
         [SerializeField]
         private ParticleSystem _explosion;
+
+        [SerializeField]
+        private SpaceFloatEvent _explosionEvent;
 
         [SerializeField]
         private CharacterGroup _group;
@@ -46,6 +50,7 @@ namespace HelicopterAttack.Characters.General.Combat
             {
                 obstacle.OnHit(this);
                 Instantiate(_explosion, transform.position, Quaternion.identity);
+                _explosionEvent.Invoke(new SpaceEventData(transform.position, _damage / 2.5f));
 
                 Destroy(gameObject);
             }

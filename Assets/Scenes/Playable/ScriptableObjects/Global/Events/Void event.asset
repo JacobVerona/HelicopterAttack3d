@@ -9,8 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52f33a262bc5701438fe65e21ff2f214, type: 3}
-  m_Name: MissionConfig
+  m_Script: {fileID: 11500000, guid: 4210ec09ac5e244419355e66c9eb8565, type: 3}
+  m_Name: Void event
   m_EditorClassIdentifier: 
-  _sceneName: Playable
-  _targets: []
