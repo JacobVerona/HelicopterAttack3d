@@ -2,9 +2,9 @@
 using HelicopterAttack.Characters.General.Groups;
 using UnityEngine;
 
-namespace HelicopterAttack.Characters.Hummer
+namespace HelicopterAttack.Characters.General
 {
-    public class HummerAim : CharacterAim
+    public class AreaAim : CharacterAim
     {
         public float ViewRadius;
 
@@ -16,7 +16,7 @@ namespace HelicopterAttack.Characters.Hummer
         public override bool FindNearestTarget (out CharacterGroup enemy)
         {
             Collider[] colliders = Physics.OverlapSphere(transform.position, ViewRadius);
-
+            
             for (int i = 0; i < colliders.Length; i++)
             {
                 var collider = colliders[i];

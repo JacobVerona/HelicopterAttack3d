@@ -1,9 +1,8 @@
 ﻿using Cinemachine;
-using HelicopterAttack.Global;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HelicopterAttack.Characters
+namespace HelicopterAttack.Global
 {
     [RequireComponent(typeof(CameraFXShake),
         typeof(CinemachineVirtualCamera))]

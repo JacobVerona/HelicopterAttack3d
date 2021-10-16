@@ -21,8 +21,11 @@ namespace HelicopterAttack.Characters.General.Combat
             }
         }
 
+        public virtual bool IsTargetVisible()
+        {
+            return Target != null;
+        }
         public abstract bool FindNearestTarget (out CharacterGroup enemy);
         public abstract Vector3 GetTargetPosition ();
-        public abstract bool IsTargetVisible ();
     }
 }

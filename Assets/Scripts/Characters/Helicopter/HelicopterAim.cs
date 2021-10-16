@@ -9,6 +9,8 @@ namespace HelicopterAttack.Characters.Helicopter
         [SerializeField]
         private float _findTargetDistance = 5f;
 
+        [SerializeField]
+        private CharacterGroup _own;
 
         public override bool FindNearestTarget (out CharacterGroup enemy)
         {
@@ -16,9 +18,11 @@ namespace HelicopterAttack.Characters.Helicopter
 
             CharacterGroup nearestEnemy = null;
             float distance = _findTargetDistance;
+
             for (int i = 0; i < colliders.Length; i++)
             {
-                if (colliders[i].TryGetComponent(out CharacterGroup enemyComponent))
+                if (colliders[i].TryGetComponent(out CharacterGroup enemyComponent) &&
+                    _own.IsAggressive(enemyComponent))
                 {
                     var distanceToEnemy = Vector3.Distance(transform.position, enemyComponent.Bounds.ClosestPoint(transform.position));
                     if (distanceToEnemy < distance)
@@ -36,7 +40,7 @@ namespace HelicopterAttack.Characters.Helicopter
 
         public override Vector3 GetTargetPosition ()
         {
-            return Target == null ? Vector3.zero : Target.Bounds.ClosestPoint(transform.position);
+            return Target == null ? Vector3.zero : Target.Bounds.center;
         }
 
         public override bool IsTargetVisible ()

@@ -1,13 +1,9 @@
 using HelicopterAttack.Characters.General.Combat;
 using HelicopterAttack.Characters.General.Groups;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace HelicopterAttack.Characters.Helicopter
 {
-    [RequireComponent(
-    typeof(HelicopterMovement),
-    typeof(HelicopterCannon))]
     public class HelicopterBrain : MonoBehaviour
     {
         private InputMap _inputMap;
@@ -19,13 +15,7 @@ namespace HelicopterAttack.Characters.Helicopter
         private CharacterGun _combat;
 
         [SerializeField]
-        private HelicopterAim _aim;
-
-        [SerializeField]
-        private CharacterGroup _group;
-
-        [SerializeField]
-        private Transform _crosshair;
+        private CharacterAim _aim;
 
         protected virtual void Awake ()
         {
@@ -42,6 +32,8 @@ namespace HelicopterAttack.Characters.Helicopter
         protected virtual void OnDisable ()
         {
             _inputMap.Main.Attack.performed -= OnAttack;
+
+            _inputMap.Disable();
         }
 
         protected virtual void Update ()
@@ -55,20 +47,8 @@ namespace HelicopterAttack.Characters.Helicopter
 
         private void OnAttack (UnityEngine.InputSystem.InputAction.CallbackContext context)
         {
-            if (Physics.Raycast(transform.position, _crosshair.transform.position - transform.position, out RaycastHit hit))
-            {
-                _aim.transform.position = hit.point;
-
-                if (_aim.FindNearestTarget(out CharacterGroup enemy)
-                    && _group.IsAggressive(enemy))
-                {
-                    _combat.TryShoot(_aim.GetTargetPosition());
-                }
-                else
-                {
-                    _combat.TryShoot(hit.point);
-                }
-            }
+            _aim.FindNearestTarget(out CharacterGroup enemy);
+            _combat.TryShoot(_aim.GetTargetPosition());
         }
     }
 }

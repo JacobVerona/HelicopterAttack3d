@@ -1,7 +1,6 @@
-﻿using HelicopterAttack.Global;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace HelicopterAttack.Characters.General.Combat
+namespace HelicopterAttack.Global
 {
     public abstract class ParticleInstaller<TEvent, TData> : MonoBehaviour
         where TEvent : GlobalEvent<TData>

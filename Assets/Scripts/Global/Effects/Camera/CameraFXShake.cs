@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace HelicopterAttack.Characters
+namespace HelicopterAttack.Global
 {
     [RequireComponent(typeof(CinemachineVirtualCamera))]
     public class CameraFXShake : MonoBehaviour

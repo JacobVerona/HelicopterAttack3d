@@ -1,4 +1,5 @@
 ﻿using HelicopterAttack.Characters.General.AI;
+using HelicopterAttack.Characters.General.Combat;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
@@ -12,7 +13,7 @@ namespace HelicopterAttack.Characters.Hummer
         private NavMeshAgent _agent;
 
         [SerializeField] 
-        private HummerAim _vision;
+        private CharacterAim _vision;
 
         private readonly YieldInstruction _waitTime = new WaitForSeconds(2f);
 
