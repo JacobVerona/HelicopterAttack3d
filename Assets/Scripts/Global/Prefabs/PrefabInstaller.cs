@@ -3,11 +3,6 @@ using UnityEngine;
 
 namespace HelicopterAttack.Global
 {
-    public record Person
-    {
-
-    }
-
     public sealed class PrefabInstaller : MonoBehaviour
     {
         [SerializeField]
