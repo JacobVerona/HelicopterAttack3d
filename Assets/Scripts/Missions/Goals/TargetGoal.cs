@@ -5,8 +5,15 @@ namespace HelicopterAttack.Missions
 {
     public abstract class TargetGoal : MonoBehaviour
     {
-        public abstract event Action<TargetGoal> Completed;
+        public event Action<TargetGoal> Completed;
 
+        public bool IsCompleted { get; private set; }
         public abstract string Description { get; }
+
+        protected void Complete()
+        {
+            IsCompleted = true;
+            Completed?.Invoke(this);
+        }
     }
 }

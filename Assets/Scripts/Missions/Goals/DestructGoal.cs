@@ -6,8 +6,6 @@ namespace HelicopterAttack.Missions
 {
     public class DestructGoal : TargetGoal
     {
-        public override event Action<TargetGoal> Completed;
-
         [SerializeField]
         private CharacterHealth _targetHealth;
 
@@ -25,7 +23,7 @@ namespace HelicopterAttack.Missions
 
         private void OnDied()
         {
-            Completed?.Invoke(this);
+            Complete();
         }
     }
 }
