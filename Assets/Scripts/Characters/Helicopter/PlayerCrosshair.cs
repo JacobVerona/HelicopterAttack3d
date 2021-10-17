@@ -1,4 +1,6 @@
 ﻿using HelicopterAttack.Characters.General.Combat;
+using HelicopterAttack.Characters.General.Combat.UI;
+using HelicopterAttack.Characters.General.Groups;
 using UnityEngine;
 
 namespace HelicopterAttack.Characters.Helicopter
@@ -9,7 +11,7 @@ namespace HelicopterAttack.Characters.Helicopter
         private float _movementRange = 50f;
 
         [SerializeField]
-        private Transform _aiming;
+        private TargetBracket _bracket;
 
         [SerializeField]
         private CharacterAim _aim;
@@ -19,6 +21,9 @@ namespace HelicopterAttack.Characters.Helicopter
 
         [SerializeField]
         private float _aimMoveSpeed = 500f;
+
+        [SerializeField]
+        private LayerMask _groundMask;
 
         private InputMap _input;
 
@@ -54,17 +59,22 @@ namespace HelicopterAttack.Characters.Helicopter
         private void AimTarget()
         {
             var ray = Camera.main.ScreenPointToRay(transform.position);
-            if (Physics.Raycast(ray, out RaycastHit hit))
+            if (Physics.Raycast(ray, out RaycastHit hit, 1000f, _groundMask))
             {
                 _aim.transform.position = MoveTo(_aim.transform.position, hit.point, _aimMoveSpeed);
 
-                var targetWorldPosition = _aim.GetTargetPosition();
-                var targetScreenPosition = Camera.main.WorldToScreenPoint(targetWorldPosition);
-                _aiming.position = MoveTo(_aiming.position, targetScreenPosition, _aimMoveSpeed);
+                if (_aim.FindNearestTarget(out CharacterGroup target))
+                {
+                    _bracket.Target = target;
+                }
+                else
+                {
+                    _bracket.Target = null;
+                }
             }
         }
 
-        private Vector3 MoveTo(Vector3 current, Vector3 target, float speed)
+        private static Vector3 MoveTo(Vector3 current, Vector3 target, float speed)
         {
             return Vector3.MoveTowards(current, target, speed * Time.deltaTime);
         }

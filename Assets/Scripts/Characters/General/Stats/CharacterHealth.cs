@@ -1,4 +1,5 @@
-﻿using HelicopterAttack.RPG;
+﻿using HelicopterAttack.Global;
+using HelicopterAttack.RPG;
 using System;
 using UnityEngine;
 using UnityEngine.Events;
@@ -10,6 +11,9 @@ namespace HelicopterAttack.Characters
         public event Action Died;
 
         public UnityEvent<Damage> Damaged;
+
+        [SerializeField]
+        private SpaceFloatEvent _explosion;
 
         [SerializeField]
         private float _startHealth;
@@ -44,6 +48,7 @@ namespace HelicopterAttack.Characters
             if (health <= 0f)
             {
                 Died?.Invoke();
+                _explosion?.Invoke(new SpaceEventData(transform.position, 1f));
                 Destroy(gameObject);
             }
         }

@@ -38,9 +38,12 @@ namespace HelicopterAttack.Characters.Helicopter
                 horizontalVelocity.y);
         }
 
-        public void Rotate (Vector2 rotationDirection)
+        public void Rotate (Vector2 rotationDirection, float minAngleToRotate)
         {
             float angle = Vector2.SignedAngle(rotationDirection, new Vector2(transform.forward.x, transform.forward.z));
+
+            if (Mathf.Abs(angle) < minAngleToRotate)
+                return;
 
             _lookDirectionRotation = Quaternion.RotateTowards(_lookDirectionRotation,
                 Quaternion.Euler(_lookDirectionRotation.eulerAngles + new Vector3(0, angle, 0)), _rotationSpeed * Time.deltaTime);

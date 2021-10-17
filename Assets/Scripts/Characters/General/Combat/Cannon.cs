@@ -39,7 +39,6 @@ namespace HelicopterAttack.Characters.General.Combat
         public void Update ()
         {
             float angle = 0f;
-            _aim.FindNearestTarget(out CharacterGroup target);
 
             angle = _aim.IsTargetVisible() == false ?
                 AngleBetweenSelfTarget(_aim.transform.position) : AngleBetweenSelfTarget(_aim.GetTargetPosition());

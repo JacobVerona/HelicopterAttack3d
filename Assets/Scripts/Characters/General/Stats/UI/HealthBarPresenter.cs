@@ -11,10 +11,14 @@ namespace HelicopterAttack.Characters
         [SerializeField]
         private CharacterHealth _target;
 
-        public void Constuctor(CharacterHealth target)
+        public void Bind(CharacterHealth target)
         {
+            _target.Health.ValueChanged -= OnValueChanged;
+
             _target = target;
-            enabled = true;
+
+            _target.Health.ValueChanged += OnValueChanged;
+            OnValueChanged(_target.Health.BaseValue);
         }
 
         private void OnEnable()
