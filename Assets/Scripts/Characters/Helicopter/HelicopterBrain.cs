@@ -39,10 +39,12 @@ namespace HelicopterAttack.Characters.Helicopter
         protected virtual void Update ()
         {
             var movementInput = _inputMap.Main.Movement.ReadValue<Vector2>();
-            var rotationInput = _inputMap.Main.Rotation.ReadValue<Vector2>();
 
             _movement.Move(movementInput);
-            _movement.Rotate(rotationInput);
+
+            _movement.Rotate(
+                (_aim.transform.position - transform.position).ToVector2XZ()
+                );
         }
 
         private void OnAttack (UnityEngine.InputSystem.InputAction.CallbackContext context)

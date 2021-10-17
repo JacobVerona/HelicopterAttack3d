@@ -47,13 +47,5 @@ namespace HelicopterAttack.Characters.Helicopter
         {
             return Target != null && DistanceToTarget <= _findTargetDistance;
         }
-
-#if UNITY_EDITOR
-        public void OnDrawGizmos ()
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, _findTargetDistance);
-        }
-#endif
     }
 }

@@ -11,12 +11,13 @@ namespace HelicopterAttack.Characters.General
         [SerializeField]
         private CharacterGroup _group;
 
-        private Vector3 _lastTargetPosition;
-
         public override bool FindNearestTarget (out CharacterGroup enemy)
         {
             Collider[] colliders = Physics.OverlapSphere(transform.position, ViewRadius);
-            
+
+            enemy = null;
+            float distance = ViewRadius;
+
             for (int i = 0; i < colliders.Length; i++)
             {
                 var collider = colliders[i];
@@ -25,15 +26,20 @@ namespace HelicopterAttack.Characters.General
                     if (findedEnemy.gameObject != gameObject
                         && _group.IsAggressive(findedEnemy))
                     {
-                        Target = findedEnemy;
-                        enemy = findedEnemy;
-                        return true;
+                        var distanceToEnemy = Vector3.Distance(transform.position, findedEnemy.Bounds.ClosestPoint(transform.position));
+                        
+                        if (distanceToEnemy < distance)
+                        {
+                            distance = distanceToEnemy;
+
+                            Target = findedEnemy;
+                            enemy = findedEnemy;
+                        }
                     }
                 }
             }
 
-            enemy = null;
-            return false;
+            return enemy != null;
         }
 
         public override bool IsTargetVisible ()
@@ -43,13 +49,16 @@ namespace HelicopterAttack.Characters.General
 
         public override Vector3 GetTargetPosition ()
         {
-            if (Target != null)
-            {
-                _lastTargetPosition = Target.Bounds.center;
-            }
-
-            return _lastTargetPosition;
+            return IsTargetVisible() ? Target.Bounds.center : transform.position;
         }
+
+#if UNITY_EDITOR
+        public void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, ViewRadius);
+        }
+#endif
     }
 }
 

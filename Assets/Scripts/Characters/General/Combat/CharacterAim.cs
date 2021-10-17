@@ -25,6 +25,7 @@ namespace HelicopterAttack.Characters.General.Combat
         {
             return Target != null;
         }
+
         public abstract bool FindNearestTarget (out CharacterGroup enemy);
         public abstract Vector3 GetTargetPosition ();
     }

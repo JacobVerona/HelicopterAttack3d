@@ -5,6 +5,8 @@ namespace HelicopterAttack.Global
 {
     public sealed class PrefabInstaller : MonoBehaviour
     {
+        public event System.Action<GameObject> Created;
+
         [SerializeField]
         private List<ComponentInstaller> _componentInstallers;
 
@@ -15,7 +17,7 @@ namespace HelicopterAttack.Global
         {
             var gameObject = Instantiate(_prefab, position, quaternion, parent);
             _componentInstallers.ForEach(inst => inst.Install(gameObject));
-
+            Created?.Invoke(gameObject);
             return gameObject;
         }
 
