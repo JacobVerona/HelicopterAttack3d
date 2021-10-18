@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 3467883117700246505}
   - component: {fileID: 8496991793957090056}
   - component: {fileID: 4506623142456964681}
+  - component: {fileID: 4793017977012196290}
   m_Layer: 0
   m_Name: hummer
   m_TagString: Untagged
@@ -180,6 +181,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _character: {fileID: 8496991793957090056}
+--- !u!114 &4793017977012196290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4578052703130431853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 308386da360f5474a8424520d5ec838d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _markerImagePrefab: {fileID: 3902476782226457915, guid: 72fd1c60cd2327444bea643082cb2065, type: 3}
+  Radar: {fileID: 0}
 --- !u!1 &6395747437188352261
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,7 +6,6 @@ namespace HelicopterAttack.StateMachine.Editor
     [CustomEditor(typeof(StateMachineBase), true)]
     public class StateMachineBaseEditor : UnityEditor.Editor
     {
-
         public override void OnInspectorGUI ()
         {
 
@@ -26,7 +25,6 @@ namespace HelicopterAttack.StateMachine.Editor
 
             base.OnInspectorGUI();
         }
-
     }
 }
 

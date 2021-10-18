@@ -13,7 +13,7 @@ namespace HelicopterAttack.Global
         [SerializeField]
         private GameObject _prefab;
 
-        public GameObject Install(Vector3 position, Quaternion quaternion, Transform parent)
+        public GameObject Istall(Vector3 position, Quaternion quaternion, Transform parent)
         {
             var gameObject = Instantiate(_prefab, position, quaternion, parent);
             _componentInstallers.ForEach(inst => inst.Install(gameObject));
@@ -21,19 +21,19 @@ namespace HelicopterAttack.Global
             return gameObject;
         }
 
-        public GameObject Install(Vector3 position, Transform parent)
+        public GameObject Istall(Vector3 position, Transform parent)
         {
-            return Install(position, Quaternion.identity, parent);
+            return Istall(position, Quaternion.identity, parent);
         }
         
-        public GameObject Install(Vector3 position)
+        public GameObject Istall(Vector3 position)
         {
-            return Install(position, Quaternion.identity, transform);
+            return Istall(position, Quaternion.identity, transform);
         }
 
-        public GameObject Install()
+        public GameObject Istall()
         {
-            return Install(_prefab.transform.position, _prefab.transform.rotation, transform);
+            return Istall(_prefab.transform.position, _prefab.transform.rotation, transform);
         }
     }
 }

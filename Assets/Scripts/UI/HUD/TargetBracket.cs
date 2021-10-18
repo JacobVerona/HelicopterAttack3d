@@ -5,6 +5,7 @@ namespace HelicopterAttack.Characters.General.Combat.UI
 {
     public class TargetBracket : MonoBehaviour
     {
+        [SerializeField]
         private RectTransform _rectTransform;
 
         [SerializeField]
@@ -36,11 +37,6 @@ namespace HelicopterAttack.Characters.General.Combat.UI
             }
         }
 
-        private void Awake()
-        {
-            _rectTransform = GetComponent<RectTransform>();
-        }
-
         private void Update()
         {
             if (Target == null)
@@ -52,14 +48,13 @@ namespace HelicopterAttack.Characters.General.Combat.UI
             ResizeBracket();
         }
 
-        public void UpdateView()
+        private void UpdateView()
         {
             if (Target.TryGetComponent(out CharacterHealth health))
             {
                 _healthBarPresenter.Bind(health);
+                ResizeBracket();
             }
-
-            ResizeBracket();
         }
 
         private void ResizeBracket()

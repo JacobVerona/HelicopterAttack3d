@@ -13,7 +13,11 @@ namespace HelicopterAttack.Characters
 
         public void Bind(CharacterHealth target)
         {
-            _target.Health.ValueChanged -= OnValueChanged;
+            if (_target != null)
+            {
+                _target.Health.ValueChanged -= OnValueChanged;
+            }
+
 
             _target = target;
 

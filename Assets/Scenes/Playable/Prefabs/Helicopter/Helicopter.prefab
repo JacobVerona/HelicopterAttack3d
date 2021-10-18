@@ -203,7 +203,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _movement: {fileID: 6013569503784502878}
   _combat: {fileID: 6013569503784502848}
-  _aim: {fileID: 6013569503567634485}
+  _aim: {fileID: 2081937470}
 --- !u!114 &236267707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,6 +245,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  _explosion: {fileID: 11400000, guid: 0ae910b3b7966bf4291d724ef644a9aa, type: 2}
   _startHealth: 100
 --- !u!114 &7729073471878382250
 MonoBehaviour:
@@ -268,7 +269,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6013569503805729361}
-  - component: {fileID: 6013569503567634485}
+  - component: {fileID: 2081937470}
   m_Layer: 0
   m_Name: Aim
   m_TagString: Untagged
@@ -290,7 +291,7 @@ Transform:
   m_Father: {fileID: 6013569503784502879}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6013569503567634485
+--- !u!114 &2081937470
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -299,13 +300,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6013569503805729390}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2afc73bd582d97c488e05a10b6bd49f3, type: 3}
+  m_Script: {fileID: 11500000, guid: 1e9cd037e0d1f1d44aba977a1a836d7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 0}
-  ViewRadius: 0
+  ViewRadius: 5
   _group: {fileID: 236267707}
-  _crosshair: {fileID: 6013569503056327736}
 --- !u!95 &6013569503951357953
 Animator:
   serializedVersion: 3

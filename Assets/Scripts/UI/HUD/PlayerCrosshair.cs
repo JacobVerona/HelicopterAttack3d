@@ -17,10 +17,7 @@ namespace HelicopterAttack.Characters.Helicopter
         private CharacterAim _aim;
 
         [SerializeField]
-        private float _moveSpeed = 100f;
-
-        [SerializeField]
-        private float _aimMoveSpeed = 500f;
+        private float _crosshairMoveSpeed = 100f;
 
         [SerializeField]
         private LayerMask _groundMask;
@@ -52,7 +49,7 @@ namespace HelicopterAttack.Characters.Helicopter
 
         private void MoveCrosshair(Vector2 input)
         {
-            transform.Translate(_moveSpeed * Time.deltaTime * input);
+            transform.Translate(_crosshairMoveSpeed * Time.deltaTime * input);
             transform.localPosition = Vector2.ClampMagnitude(transform.localPosition, _movementRange);
         }
 
@@ -61,7 +58,7 @@ namespace HelicopterAttack.Characters.Helicopter
             var ray = Camera.main.ScreenPointToRay(transform.position);
             if (Physics.Raycast(ray, out RaycastHit hit, 1000f, _groundMask))
             {
-                _aim.transform.position = MoveTo(_aim.transform.position, hit.point, _aimMoveSpeed);
+                _aim.transform.position = hit.point;
 
                 if (_aim.FindNearestTarget(out CharacterGroup target))
                 {
@@ -72,11 +69,6 @@ namespace HelicopterAttack.Characters.Helicopter
                     _bracket.Target = null;
                 }
             }
-        }
-
-        private static Vector3 MoveTo(Vector3 current, Vector3 target, float speed)
-        {
-            return Vector3.MoveTowards(current, target, speed * Time.deltaTime);
         }
     }
 }
