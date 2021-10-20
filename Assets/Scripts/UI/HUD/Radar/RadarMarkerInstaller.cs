@@ -10,7 +10,7 @@ namespace HelicopterAttack.UI.HUD
 
         public override void Resolve(in RadarMarker component)
         {
-            component.Constuctor(_radar);
+            component.Constructor(_radar);
         }
     }
 }

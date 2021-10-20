@@ -169,5 +169,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6c4ffc96b36c4c4d9f240b9510372ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _markerImagePrefab: {fileID: 3902476782226457915, guid: 15df5486ebf5b6748b19b37130aaa795, type: 3}
+  _markerPrefab: {fileID: 1666952576694530538, guid: 15df5486ebf5b6748b19b37130aaa795, type: 3}
   Radar: {fileID: 0}

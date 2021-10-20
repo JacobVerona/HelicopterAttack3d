@@ -75,6 +75,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4793017977012196290, guid: da5897f413eb1054ca79ee79fab5e92f, type: 3}
+      propertyPath: _markerPrefab
+      value: 
+      objectReference: {fileID: 1666952576694530538, guid: f3cc1af3c270f81468cf0cab1c8685f2, type: 3}
     - target: {fileID: 5269404170334785173, guid: da5897f413eb1054ca79ee79fab5e92f, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

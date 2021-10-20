@@ -15,9 +15,18 @@ namespace HelicopterAttack.Global
 
         public GameObject Istall(Vector3 position, Quaternion quaternion, Transform parent)
         {
+            bool activeState = _prefab.activeSelf;
+
+            _prefab.SetActive(false);
+
             var gameObject = Instantiate(_prefab, position, quaternion, parent);
             _componentInstallers.ForEach(inst => inst.Install(gameObject));
             Created?.Invoke(gameObject);
+
+            gameObject.SetActive(activeState);
+
+            _prefab.SetActive(activeState);
+
             return gameObject;
         }
 

@@ -11,33 +11,30 @@ namespace HelicopterAttack.Characters
         [SerializeField]
         private CharacterHealth _target;
 
-        public void Bind(CharacterHealth target)
-        {
-            if (_target != null)
-            {
-                _target.Health.ValueChanged -= OnValueChanged;
-            }
+        public bool IsBinded { get => _target != null; }
 
+        public void SetTarget(CharacterHealth target)
+        {
+            Unbind();
 
             _target = target;
 
+            Bind();
+        }
+
+        public void Bind()
+        {
             _target.Health.ValueChanged += OnValueChanged;
             OnValueChanged(_target.Health.BaseValue);
         }
 
-        private void OnEnable()
+        public void Unbind()
         {
-            _target.Health.ValueChanged += OnValueChanged;
-        }
+            if (IsBinded == false) 
+                return; 
 
-        private void OnDisable()
-        {
             _target.Health.ValueChanged -= OnValueChanged;
-        }
-
-        private void Start()
-        {
-            OnValueChanged(_target.Health.Value);
+            _target = null;
         }
 
         private void OnValueChanged(float value)

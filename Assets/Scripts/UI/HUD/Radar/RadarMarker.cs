@@ -1,40 +1,34 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 
 namespace HelicopterAttack.UI.HUD
 {
     public class RadarMarker : MonoBehaviour
     {
         [SerializeField]
-        private Image _markerImagePrefab;
+        private RectTransform _markerPrefab;
 
         [SerializeField]
         protected Radar Radar;
 
-        private RectTransform _markerGraphicRect;
-
-        public void Constuctor(Radar radar)
+        public RadarMarker Constructor(Radar radar)
         {
-            Radar?.Unregister(this);
-
             Radar = radar;
-
-            Radar.Register(this);
+            return this;
         }
 
         private void Awake()
         {
-            Radar?.Register(this);
+            Radar.Register(this);
         }
 
         private void OnEnable()
         {
-            _markerGraphicRect?.gameObject.SetActive(true);
+            Radar.SetMarkerActive(this, true);
         }
 
         private void OnDisable()
         {
-            _markerGraphicRect?.gameObject.SetActive(false);
+            Radar.SetMarkerActive(this, false);
         }
 
         private void OnDestroy()
@@ -42,15 +36,14 @@ namespace HelicopterAttack.UI.HUD
             Radar.Unregister(this);
         }
 
-        public virtual RectTransform CreateMarker(RectTransform _markersArea)
+        public virtual RectTransform CreateMarker(RectTransform markersArea)
         {
-            _markerGraphicRect = Instantiate(_markerImagePrefab, _markersArea).rectTransform;
-            return _markerGraphicRect;
+            return Instantiate(_markerPrefab, markersArea);
         }
 
-        public virtual void RadarUIUpdate(in RectTransform markerGraphic)
+        public virtual Vector2 GetMarkerPositionOnRadar()
         {
-            markerGraphic.anchoredPosition = Radar.WorldPositionToRadarPosition(transform.position);
+            return Radar.WorldPositionToRadarPosition(transform.position);
         }
     }
 }

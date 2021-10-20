@@ -43,9 +43,7 @@ namespace HelicopterAttack.Characters.Helicopter
 
             _movement.Move(movementInput);
 
-            _movement.Rotate(
-                (_aim.transform.position - transform.position).ToVector2XZ(), 2f
-                );
+            _movement.Rotate((_aim.transform.position - transform.position).ToVector2XZ());
         }
 
         private void OnAttack (UnityEngine.InputSystem.InputAction.CallbackContext context)

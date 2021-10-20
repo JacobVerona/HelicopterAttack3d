@@ -4,9 +4,9 @@ namespace HelicopterAttack.UI.HUD
 {
     public class GoalMarker : RadarMarker
     {
-        public override void RadarUIUpdate(in RectTransform markerGraphic)
+        public override Vector2 GetMarkerPositionOnRadar()
         {
-            markerGraphic.anchoredPosition = Radar.WorldPositionToRadarPositionClamped(transform.position);
+            return Radar.WorldPositionToRadarPositionClamped(transform.position);
         }
     }
 }

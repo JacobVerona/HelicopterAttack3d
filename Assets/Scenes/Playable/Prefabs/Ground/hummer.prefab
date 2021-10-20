@@ -43,7 +43,6 @@ GameObject:
   - component: {fileID: 1414813045473698817}
   - component: {fileID: 3695743888805727294}
   - component: {fileID: 1190359728367100826}
-  - component: {fileID: 3467883117700246505}
   - component: {fileID: 8496991793957090056}
   - component: {fileID: 4506623142456964681}
   - component: {fileID: 4793017977012196290}
@@ -68,6 +67,7 @@ Transform:
   - {fileID: 5918974608521231351}
   - {fileID: 3498076484606469204}
   - {fileID: 8361443973505319967}
+  - {fileID: 4309196684400585501}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -136,21 +136,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _collider: {fileID: 1414813045473698817}
   _group: {fileID: 11400000, guid: 53972b482e3e9b74fa7889043b710e37, type: 2}
---- !u!114 &3467883117700246505
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4578052703130431853}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e9cd037e0d1f1d44aba977a1a836d7d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Target: {fileID: 0}
-  ViewRadius: 10
-  _group: {fileID: 1190359728367100826}
 --- !u!114 &8496991793957090056
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,7 +178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 308386da360f5474a8424520d5ec838d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _markerImagePrefab: {fileID: 3902476782226457915, guid: 72fd1c60cd2327444bea643082cb2065, type: 3}
+  _markerPrefab: {fileID: 1666952576694530538, guid: 72fd1c60cd2327444bea643082cb2065, type: 3}
   Radar: {fileID: 0}
 --- !u!1 &6395747437188352261
 GameObject:
@@ -371,11 +356,57 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86e650a744f3652418ced4b284ed6fb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _aim: {fileID: 3467883117700246505}
+  _aim: {fileID: 1553533803119648603}
   _group: {fileID: 1190359728367100826}
   _bulletPrefab: {fileID: 1114010647414350055, guid: 7088e760d6c94574da6ac7439e3491c4, type: 3}
   _firePoint: {fileID: 3660618142743365679}
   _rotationSpeed: 100
+--- !u!1 &7409484200697179510
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4309196684400585501}
+  - component: {fileID: 1553533803119648603}
+  m_Layer: 0
+  m_Name: Aim
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4309196684400585501
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7409484200697179510}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3801972675076385751}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1553533803119648603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7409484200697179510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e9cd037e0d1f1d44aba977a1a836d7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: {fileID: 0}
+  ViewRadius: 10
+  _group: {fileID: 1190359728367100826}
 --- !u!1 &7484225313044521949
 GameObject:
   m_ObjectHideFlags: 0
@@ -436,7 +467,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _agent: {fileID: 3695743888805727294}
-  _vision: {fileID: 3467883117700246505}
+  _vision: {fileID: 1553533803119648603}
   _patrolRadius: 10
 --- !u!114 &4503081600210817186
 MonoBehaviour:
@@ -451,7 +482,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _agent: {fileID: 3695743888805727294}
-  _vision: {fileID: 3467883117700246505}
+  _vision: {fileID: 1553533803119648603}
 --- !u!114 &7035978856951166568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -465,7 +496,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _agent: {fileID: 3695743888805727294}
-  _vision: {fileID: 3467883117700246505}
+  _vision: {fileID: 1553533803119648603}
   _gun: {fileID: 3361839122853839438}
   _followDistance: 8
   _shootCoolDown: 0.5
