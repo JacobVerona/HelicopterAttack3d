@@ -1,6 +1,6 @@
-﻿using Characters.StateMachine;
-using HelicopterAttack.Characters.General.AI;
+﻿using HelicopterAttack.Characters.General.AI;
 using HelicopterAttack.Characters.General.Groups;
+using HelicopterAttack.Characters.General.Combat;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
@@ -15,14 +15,13 @@ namespace HelicopterAttack.Characters.Hummer
         [SerializeField]
         private NavMeshAgent _agent;
 
-        private PatrolPath _patrolPath;
-
         [SerializeField]
-        private HummerAim _vision;
+        private CharacterAim _vision;
 
         [SerializeField]
         private float _patrolRadius = 10f;
 
+        private IPatrolPath _patrolPath;
         private readonly YieldInstruction _waitTime = new WaitForSeconds(1f);
 
         private float _chachedStoppingDistance;
@@ -64,7 +63,6 @@ namespace HelicopterAttack.Characters.Hummer
                 yield return _waitTime;
             }
         }
-
     }
 }
 

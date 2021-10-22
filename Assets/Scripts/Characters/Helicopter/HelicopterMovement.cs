@@ -8,15 +8,10 @@ namespace HelicopterAttack.Characters.Helicopter
         private float _moveAngleRotation = 35f;
 
         [SerializeField]
-        private float _movementSpeed = 2f;
-        [SerializeField]
-        private float _rotationSpeed = 2f;
+        private float _movementSpeed = 4f;
 
         [SerializeField]
-        private AnimationCurve _heightShake;
-
-        [SerializeField]
-        private float _heightShakeMultiply = 4f;
+        private float _rotationSpeed = 120f;
 
         private Vector3 _velocity;
         private Quaternion _baseQuaternion;
@@ -25,7 +20,6 @@ namespace HelicopterAttack.Characters.Helicopter
         protected void Update ()
         {
             transform.rotation = _baseQuaternion * _lookDirectionRotation;
-            transform.Translate(_movementSpeed * _velocity * Time.deltaTime, Space.World);
         }
 
         public void Move (Vector2 horizontalVelocity)
@@ -34,8 +28,10 @@ namespace HelicopterAttack.Characters.Helicopter
                 new Vector3(horizontalVelocity.y, 0, -horizontalVelocity.x)), _rotationSpeed * Time.deltaTime);
 
             _velocity = new Vector3(horizontalVelocity.x,
-                _heightShake.Evaluate(Time.time) * _heightShakeMultiply,
+                0,
                 horizontalVelocity.y);
+
+            transform.Translate(_movementSpeed * _velocity * Time.deltaTime, Space.World);
         }
 
         public void Rotate (Vector2 rotationDirection)

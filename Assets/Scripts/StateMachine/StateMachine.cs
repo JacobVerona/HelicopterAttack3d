@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
-namespace Characters.StateMachine
+namespace HelicopterAttack.StateMachine
 {
     public abstract class StateMachine<TStateBase> : StateMachineBase
         where TStateBase : IStateable

@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 1114010647414350073}
   - component: {fileID: 1114010647414350074}
   - component: {fileID: 1114010647414350054}
-  - component: {fileID: 1114010647414350055}
   - component: {fileID: 7613243255228644862}
+  - component: {fileID: 245906311963948421}
   m_Layer: 0
   m_Name: Bullet2
   m_TagString: Untagged
@@ -98,54 +98,8 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
---- !u!114 &1114010647414350055
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1114010647414350076}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e12d6121f1c78dc478c8ab7329a6edcf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _velocity:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: -0.42780685
-      outSlope: -0.42780685
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.12094427
-    - serializedVersion: 3
-      time: 0.58442265
-      value: -0.28195465
-      inSlope: -0.535197
-      outSlope: -0.535197
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.20161638
-    - serializedVersion: 3
-      time: 1
-      value: -1
-      inSlope: -4.7647047
-      outSlope: -4.7647047
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.12752663
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 1
-    m_RotationOrder: 4
-  _flyPower: 0.1
+  m_Constraints: 112
+  m_CollisionDetection: 2
 --- !u!65 &7613243255228644862
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -159,3 +113,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &245906311963948421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1114010647414350076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f7a478f133489247a7386b8eacf75d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _onBulletHitEvent: {fileID: 11400000, guid: 57141c60264d6454891ecd1a4cb29502, type: 2}
+  _group: {fileID: 0}
+  _flyPower: 1
+  _damage: 15
+  _explosionPower: 1.5

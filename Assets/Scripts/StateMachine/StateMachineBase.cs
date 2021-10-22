@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Characters.StateMachine
+namespace HelicopterAttack.StateMachine
 {
     public abstract class StateMachineBase : MonoBehaviour
     {

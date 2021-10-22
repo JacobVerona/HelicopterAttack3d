@@ -1,7 +1,6 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Characters.StateMachine
+namespace HelicopterAttack.StateMachine
 {
     public abstract class MonoState : MonoBehaviour, IStateable
     {

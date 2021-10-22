@@ -2,11 +2,10 @@
 
 namespace HelicopterAttack.Characters.General.AI
 {
-    public class RandomPatrolPath : PatrolPath
+    public class RandomPatrolPath : IPatrolPath
     {
         private Vector3 _prevPosition;
         private Vector3 _nextPosition;
-
 
         public RandomPatrolPath (Vector3 centerPoint, float patrolRadius)
         {
@@ -15,13 +14,13 @@ namespace HelicopterAttack.Characters.General.AI
             PatrolCenterPosition = centerPoint;
             PatrolRadius = patrolRadius;
 
-            UpdatePatrolPosition(centerPoint, 0);
+            UpdatePatrolPosition(centerPoint, 10000000f);
         }
 
         public Vector3 PatrolCenterPosition { get; set; }
         public float PatrolRadius { get; set; }
 
-        public override Vector3 UpdatePatrolPosition (Vector3 currentPosition, float stoppingDistance)
+        public Vector3 UpdatePatrolPosition (Vector3 currentPosition, float stoppingDistance)
         {
             if (Vector3.Distance(_prevPosition, currentPosition) < stoppingDistance)
             {

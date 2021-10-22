@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using HelicopterAttack.Characters.General.Groups;
+using UnityEngine;
 
 namespace HelicopterAttack.Characters.General.Combat
 {
@@ -8,6 +9,9 @@ namespace HelicopterAttack.Characters.General.Combat
 
         [SerializeField]
         private CharacterAim _aim;
+
+        [SerializeField]
+        private CharacterGroup _group;
 
         [SerializeField]
         private Bullet _bulletPrefab;
@@ -20,17 +24,6 @@ namespace HelicopterAttack.Characters.General.Combat
 
         private bool _isReadyToShoot;
 
-        private float AngleBetweenSelfTarget
-        {
-            get
-            {
-                Vector3 rotationDirection = _aim.GetTargetPosition() - transform.position;
-
-                return Vector2.SignedAngle(new Vector2(rotationDirection.x, rotationDirection.z),
-                    new Vector2(transform.forward.x, transform.forward.z));
-            }
-        }
-
         public override void TryShoot (Vector3 position)
         {
             if (_isReadyToShoot == false)
@@ -39,27 +32,35 @@ namespace HelicopterAttack.Characters.General.Combat
             }
 
             var bullet = Instantiate(_bulletPrefab, _firePoint.position, Quaternion.identity);
+            bullet.Constructor(_group);
             bullet.transform.forward = position - bullet.transform.position;
         }
 
         public void Update ()
         {
-            if (_aim.IsTargetVisible() == false)
-            {
-                return;
-            }
+            float angle = 0f;
 
-            float angle = AngleBetweenSelfTarget;
+            angle = _aim.IsTargetVisible() == false ?
+                AngleBetweenSelfTarget(_aim.transform.position) : AngleBetweenSelfTarget(_aim.GetTargetPosition());
 
             RotateHead(angle);
 
             _isReadyToShoot = Mathf.Abs(angle) <= AngleFieldOfView;
         }
 
+        private float AngleBetweenSelfTarget(Vector3 targetPosition)
+        {
+            Vector3 rotationDirection = targetPosition - transform.position;
+
+            return Vector2.SignedAngle(new Vector2(rotationDirection.x, rotationDirection.z),
+                new Vector2(transform.forward.x, transform.forward.z));
+
+        }
+
         private void RotateHead (float angle)
         {
-            transform.rotation = Quaternion.RotateTowards(transform.rotation,
-               Quaternion.Euler(transform.eulerAngles + new Vector3(0, angle, 0)), _rotationSpeed * Time.deltaTime);
+            transform.localRotation = Quaternion.RotateTowards(transform.localRotation,
+               Quaternion.Euler(transform.localEulerAngles + new Vector3(0, angle, 0)), _rotationSpeed * Time.deltaTime);
         }
     }
 }
