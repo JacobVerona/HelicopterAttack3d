@@ -1842,7 +1842,7 @@ PrefabInstance:
     - target: {fileID: 4014760571042847191, guid: da5897f413eb1054ca79ee79fab5e92f, type: 3}
       propertyPath: _defaultState
       value: 
-      objectReference: {fileID: 382265433}
+      objectReference: {fileID: 0}
     - target: {fileID: 4578052703130431853, guid: da5897f413eb1054ca79ee79fab5e92f, type: 3}
       propertyPath: m_Name
       value: hummer
@@ -2731,17 +2731,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6b12869e15a50043860b12b8b9f0f9a, type: 3}
---- !u!114 &382265433 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7346616606629245244, guid: da5897f413eb1054ca79ee79fab5e92f, type: 3}
-  m_PrefabInstance: {fileID: 245947807}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cef477fffc3d30a49be9dc9d4d6a0443, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &387511236
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12061,6 +12050,10 @@ PrefabInstance:
     - target: {fileID: 1230961531527791597, guid: da5897f413eb1054ca79ee79fab5e92f, type: 3}
       propertyPath: _UiWhereDisplay
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2146202278163893933, guid: da5897f413eb1054ca79ee79fab5e92f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3801972675076385751, guid: da5897f413eb1054ca79ee79fab5e92f, type: 3}
       propertyPath: m_RootOrder

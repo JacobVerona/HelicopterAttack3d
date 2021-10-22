@@ -1,53 +1,35 @@
 ﻿using HelicopterAttack.Characters.General.AI;
 using HelicopterAttack.Characters.General.Combat;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
 namespace HelicopterAttack.Characters.Hummer
 {
-    [RequireComponent(typeof(PatrolState), typeof(AttackState))]
     public class FollowState : AIState
     {
-        [SerializeField] 
-        private NavMeshAgent _agent;
+        private readonly NavMeshAgent _agent;
+        private readonly CharacterAim _vision;
 
-        [SerializeField] 
-        private CharacterAim _vision;
-
-        private readonly YieldInstruction _waitTime = new WaitForSeconds(2f);
-
-        protected override void OnEntry ()
+        public FollowState(NavMeshAgent agent, CharacterAim aim)
         {
-            StartCoroutine(nameof(StateTick));
+            _agent = agent;
+            _vision = aim;
         }
 
-        protected override void OnExit ()
+        public override void OnAIUpdate()
         {
-            StopCoroutine(nameof(StateTick));
+            _agent.SetDestination(_vision.GetTargetPosition());
         }
 
-        private IEnumerator StateTick ()
+        public bool TargetIsntVisibleTransition()
         {
-            while (true)
-            {
-                if (_vision.IsTargetVisible() == false)
-                {
-                    StateMachine.SetState<PatrolState>();
-                    break;
-                }
+            return _vision.IsTargetVisible() == false;
+        }
 
-                if (Vector2.Distance(new Vector2(_agent.transform.position.x, _agent.transform.position.z),
-                    new Vector2(_vision.GetTargetPosition().x, _vision.GetTargetPosition().z)) <= _agent.stoppingDistance)
-                {
-                    StateMachine.SetState<AttackState>();
-                    break;
-                }
-
-                _agent.SetDestination(_vision.GetTargetPosition());
-                
-                yield return _waitTime;
-            }
+        public bool TargetGot()
+        {
+            return Vector2.Distance(new Vector2(_agent.transform.position.x, _agent.transform.position.z),
+                    new Vector2(_vision.GetTargetPosition().x, _vision.GetTargetPosition().z)) <= _agent.stoppingDistance;
         }
     }
 }

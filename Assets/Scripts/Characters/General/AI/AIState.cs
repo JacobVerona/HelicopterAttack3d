@@ -2,11 +2,8 @@
 
 namespace HelicopterAttack.Characters.General.AI
 {
-    public class AIState : MonoState
+    public class AIState : State
     {
-        public AIStateMachine StateMachine { get; set; }
+        public virtual void OnAIUpdate() { }
     }
 }
-
-
-
