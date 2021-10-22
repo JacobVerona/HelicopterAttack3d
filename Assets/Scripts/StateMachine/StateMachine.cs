@@ -39,7 +39,6 @@ namespace HelicopterAttack.StateMachine
 
         private void OnDestroy ()
         {
-            CurrentState.OnExit();
             foreach (var registeredStates in _states.Values)
             {
                 registeredStates.State.OnUnregistered();
@@ -96,7 +95,9 @@ namespace HelicopterAttack.StateMachine
         {
             if (_states.TryGetValue(type, out RegisteredState<TStateBase> state))
             {
+                CurrentState.OnExit();
                 _current = state;
+                CurrentState.OnEntry();
                 StateChanged?.Invoke();
             }
             else
