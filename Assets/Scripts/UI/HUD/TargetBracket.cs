@@ -47,7 +47,7 @@ namespace HelicopterAttack.Characters.General.Combat.UI
 
             if (Target.TryGetComponent(out CharacterHealth health))
             {
-                _healthBarPresenter.SetTarget(health);
+                _healthBarPresenter.Rebind(health);
             }
 
             ResizeBracket(Target.Bounds);

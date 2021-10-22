@@ -22,6 +22,14 @@
                     "interactions": ""
                 },
                 {
+                    "name": "SecondAttack",
+                    "type": "Button",
+                    "id": "64ef8024-7b04-43a5-af91-fe8cf7d0a10b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "Rotation",
                     "type": "Value",
                     "id": "7ea35780-6dea-492d-ad12-fe7c7363ea3c",
@@ -103,7 +111,7 @@
                     "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard",
+                    "groups": "Keyboard;Android",
                     "action": "Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -116,6 +124,17 @@
                     "processors": "",
                     "groups": "Android",
                     "action": "Rotation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "85eb6516-7a60-4699-a0e7-1db55cd83d67",
+                    "path": "<Keyboard>/leftAlt",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard;Android",
+                    "action": "SecondAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

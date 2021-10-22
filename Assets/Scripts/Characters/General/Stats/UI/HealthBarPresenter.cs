@@ -13,28 +13,26 @@ namespace HelicopterAttack.Characters
 
         public bool IsBinded { get => _target != null; }
 
-        public void SetTarget(CharacterHealth target)
+        private void Bind(CharacterHealth target)
         {
-            Unbind();
-
             _target = target;
-
-            Bind();
-        }
-
-        public void Bind()
-        {
             _target.Health.ValueChanged += OnValueChanged;
             OnValueChanged(_target.Health.BaseValue);
         }
 
-        public void Unbind()
+        private void Unbind()
         {
-            if (IsBinded == false) 
-                return; 
+            if (IsBinded == false)
+                return;
 
             _target.Health.ValueChanged -= OnValueChanged;
             _target = null;
+        }
+
+        public void Rebind(CharacterHealth target)
+        {
+            Unbind();
+            Bind(target);
         }
 
         private void OnValueChanged(float value)

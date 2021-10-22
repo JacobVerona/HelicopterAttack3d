@@ -15,11 +15,6 @@ namespace HelicopterAttack.StateMachine.Editor
             {
                 GUILayout.BeginHorizontal();
                 GUILayout.Label(state.Name);
-
-                if (GUILayout.Button("Switch state"))
-                {
-                    stateMachine.SetState(state);
-                }
                 GUILayout.EndHorizontal();
             }
 

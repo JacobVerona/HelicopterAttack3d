@@ -35,6 +35,14 @@ public class @InputMap : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
+                    ""name"": ""SecondAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""64ef8024-7b04-43a5-af91-fe8cf7d0a10b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
                     ""name"": ""Rotation"",
                     ""type"": ""Value"",
                     ""id"": ""7ea35780-6dea-492d-ad12-fe7c7363ea3c"",
@@ -116,7 +124,7 @@ public class @InputMap : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard"",
+                    ""groups"": ""Keyboard;Android"",
                     ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -129,6 +137,17 @@ public class @InputMap : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Android"",
                     ""action"": ""Rotation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""85eb6516-7a60-4699-a0e7-1db55cd83d67"",
+                    ""path"": ""<Keyboard>/leftAlt"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard;Android"",
+                    ""action"": ""SecondAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -152,6 +171,7 @@ public class @InputMap : IInputActionCollection, IDisposable
         m_Main = asset.FindActionMap("Main", throwIfNotFound: true);
         m_Main_Movement = m_Main.FindAction("Movement", throwIfNotFound: true);
         m_Main_Attack = m_Main.FindAction("Attack", throwIfNotFound: true);
+        m_Main_SecondAttack = m_Main.FindAction("SecondAttack", throwIfNotFound: true);
         m_Main_Rotation = m_Main.FindAction("Rotation", throwIfNotFound: true);
     }
 
@@ -204,6 +224,7 @@ public class @InputMap : IInputActionCollection, IDisposable
     private IMainActions m_MainActionsCallbackInterface;
     private readonly InputAction m_Main_Movement;
     private readonly InputAction m_Main_Attack;
+    private readonly InputAction m_Main_SecondAttack;
     private readonly InputAction m_Main_Rotation;
     public struct MainActions
     {
@@ -211,6 +232,7 @@ public class @InputMap : IInputActionCollection, IDisposable
         public MainActions(@InputMap wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Main_Movement;
         public InputAction @Attack => m_Wrapper.m_Main_Attack;
+        public InputAction @SecondAttack => m_Wrapper.m_Main_SecondAttack;
         public InputAction @Rotation => m_Wrapper.m_Main_Rotation;
         public InputActionMap Get() { return m_Wrapper.m_Main; }
         public void Enable() { Get().Enable(); }
@@ -227,6 +249,9 @@ public class @InputMap : IInputActionCollection, IDisposable
                 @Attack.started -= m_Wrapper.m_MainActionsCallbackInterface.OnAttack;
                 @Attack.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnAttack;
                 @Attack.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnAttack;
+                @SecondAttack.started -= m_Wrapper.m_MainActionsCallbackInterface.OnSecondAttack;
+                @SecondAttack.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnSecondAttack;
+                @SecondAttack.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnSecondAttack;
                 @Rotation.started -= m_Wrapper.m_MainActionsCallbackInterface.OnRotation;
                 @Rotation.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnRotation;
                 @Rotation.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnRotation;
@@ -240,6 +265,9 @@ public class @InputMap : IInputActionCollection, IDisposable
                 @Attack.started += instance.OnAttack;
                 @Attack.performed += instance.OnAttack;
                 @Attack.canceled += instance.OnAttack;
+                @SecondAttack.started += instance.OnSecondAttack;
+                @SecondAttack.performed += instance.OnSecondAttack;
+                @SecondAttack.canceled += instance.OnSecondAttack;
                 @Rotation.started += instance.OnRotation;
                 @Rotation.performed += instance.OnRotation;
                 @Rotation.canceled += instance.OnRotation;
@@ -269,6 +297,7 @@ public class @InputMap : IInputActionCollection, IDisposable
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
+        void OnSecondAttack(InputAction.CallbackContext context);
         void OnRotation(InputAction.CallbackContext context);
     }
 }

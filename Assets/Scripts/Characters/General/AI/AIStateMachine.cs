@@ -1,3 +1,5 @@
+using HelicopterAttack.Characters.General.Combat;
+using HelicopterAttack.Global;
 using HelicopterAttack.StateMachine;
 using UnityEngine;
 
@@ -22,6 +24,3 @@ namespace HelicopterAttack.Characters.General.AI
         }
     }
 }
-
-
-

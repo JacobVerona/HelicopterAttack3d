@@ -1,5 +1,4 @@
 ﻿using HelicopterAttack.Characters;
-using System;
 using UnityEngine;
 
 namespace HelicopterAttack.Missions

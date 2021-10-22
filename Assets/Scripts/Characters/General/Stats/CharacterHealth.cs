@@ -20,6 +20,7 @@ namespace HelicopterAttack.Characters
 
         public CharacterAttribute MaxHealth { get; private set; } = new CharacterAttribute(0);
         public CharacterAttribute Health { get; private set; } = new CharacterAttribute(0);
+        public bool IsDead { get; private set; }
 
         private void Awake()
         {
@@ -47,6 +48,7 @@ namespace HelicopterAttack.Characters
         {
             if (health <= 0f)
             {
+                IsDead = true;
                 Died?.Invoke();
                 _explosion?.Invoke(new SpaceEventData(transform.position, 1f));
                 Destroy(gameObject);

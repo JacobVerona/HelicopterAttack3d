@@ -99,49 +99,6 @@ MonoBehaviour:
   _moveAngleRotation: 20
   _movementSpeed: 4
   _rotationSpeed: 120
-  _heightShake:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0.1707592
-      outSlope: 0.1707592
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.29457697
-      value: 0.050301727
-      inSlope: 0.01065548
-      outSlope: 0.01065548
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.35053214
-    - serializedVersion: 3
-      time: 0.69992495
-      value: -0.051284038
-      inSlope: 0.01245439
-      outSlope: 0.01245439
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.29439536
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0.1625511
-      outSlope: 0.1625511
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.30296504
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 1
-    m_RotationOrder: 4
-  _heightShakeMultiply: 4
 --- !u!114 &6013569503784502848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,7 +129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _movement: {fileID: 6013569503784502878}
   _combat: {fileID: 6013569503784502848}
-  _aim: {fileID: 2081937470}
+  _aim: {fileID: 0}
 --- !u!114 &236267707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -273,7 +230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 0}
-  ViewRadius: 5
+  ViewRadius: 2.5
   _group: {fileID: 236267707}
 --- !u!95 &6013569503951357953
 Animator:

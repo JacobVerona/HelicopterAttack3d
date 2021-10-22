@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace HelicopterAttack.Global
@@ -13,7 +14,7 @@ namespace HelicopterAttack.Global
         [SerializeField]
         private GameObject _prefab;
 
-        public GameObject Istall(Vector3 position, Quaternion quaternion, Transform parent)
+        public GameObject Install(Vector3 position, Quaternion quaternion, Transform parent)
         {
             bool activeState = _prefab.activeSelf;
 
@@ -30,19 +31,19 @@ namespace HelicopterAttack.Global
             return gameObject;
         }
 
-        public GameObject Istall(Vector3 position, Transform parent)
+        public GameObject Install(Vector3 position, Transform parent)
         {
-            return Istall(position, Quaternion.identity, parent);
+            return Install(position, Quaternion.identity, parent);
         }
         
-        public GameObject Istall(Vector3 position)
+        public GameObject Install(Vector3 position)
         {
-            return Istall(position, Quaternion.identity, transform);
+            return Install(position, Quaternion.identity, transform);
         }
 
-        public GameObject Istall()
+        public GameObject Install()
         {
-            return Istall(_prefab.transform.position, _prefab.transform.rotation, transform);
+            return Install(_prefab.transform.position, _prefab.transform.rotation, transform);
         }
     }
 }
