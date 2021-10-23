@@ -1,60 +1,34 @@
 ﻿using HelicopterAttack.Characters.General.AI;
 using HelicopterAttack.Characters.General.Combat;
-using System.Collections;
-using UnityEngine;
-using UnityEngine.AI;
 
 namespace HelicopterAttack.Characters.Hummer
 {
-    [RequireComponent(typeof(FollowState), typeof(PatrolState))]
     public class AttackState : AIState
     {
-        [SerializeField]
-        private NavMeshAgent _agent;
-
-        [SerializeField]
-        private CharacterAim _vision;
-
-        [SerializeField]
-        private CharacterGun _gun;
-
-        [SerializeField]
-        private float _followDistance;
+        private readonly CharacterAim _vision;
+        private readonly CharacterGun _gun;
+        private readonly float _followDistance;
         
-        private readonly YieldInstruction _waitTime = new WaitForSeconds(1f);
-
-        public float _shootCoolDown = 0.25f;
-
-        protected override void OnEntry ()
+        public AttackState(CharacterAim characterAim, CharacterGun characterGun, float followDistance)
         {
-            StartCoroutine(nameof(AITick));
+            _vision = characterAim;
+            _gun = characterGun;
+            _followDistance = followDistance;
         }
 
-        protected override void OnExit ()
+        public override void OnAIUpdate()
         {
-            StopCoroutine(nameof(AITick));
+            _gun.TryShoot(_vision.GetTargetPosition());
         }
 
-        private IEnumerator AITick ()
+        public bool TargetIsntVisibleTransition()
         {
-            while (true)
-            {
-                if (_vision.IsTargetVisible() == false)
-                {
-                    StateMachine.SetState<PatrolState>();
-                    break;
-                }
+            return _vision.IsTargetVisible() == false;
+        }
 
-                if (_vision.DistanceToTarget > _followDistance)
-                {
-                    StateMachine.SetState<FollowState>();
-                    break;
-                }
-
-                _gun.TryShoot(_vision.GetTargetPosition());
-
-                yield return _waitTime;
-            }
+        public bool TargetTooFarTransition()
+        {
+            return _vision.DistanceToTarget > _followDistance;
         }
     }
 }

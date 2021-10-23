@@ -4,93 +4,101 @@ using UnityEngine;
 
 namespace HelicopterAttack.StateMachine
 {
-    public abstract class StateMachine<TStateBase> : StateMachineBase
-        where TStateBase : IStateable
+    public abstract class StateMachine<TStateBase> : StateMachine, IStateChanger, ISMConfigurator<TStateBase>
+        where TStateBase : State
     {
-        protected Dictionary<Type, TStateBase> States = new Dictionary<Type, TStateBase>();
+        private Dictionary<Type, RegisteredState<TStateBase>> _states = new Dictionary<Type, RegisteredState<TStateBase>>();
+        private RegisteredState<TStateBase> _current;
 
-        private TStateBase _currentState;
+        public override event Action StateChanged;
 
-        [SerializeField] 
-        private TStateBase _defaultState;
-
-        public event Action StateChanged;
-
-        public override IEnumerable<Type> StateTypes => States.Keys;
+        public override IEnumerable<Type> StateTypes => _states.Keys;
 
         public TStateBase CurrentState
         {
-            get => _currentState ?? _defaultState;
-            private set
-            {
-                CurrentState.Exit();
-                _currentState = value;
+            get => _current.State;
+        }
 
-                if (enabled)
-                {
-                    CurrentState.Entry();
-                }
-
-                StateChanged?.Invoke();
-            }
+        private void Awake()
+        {
+            ConfigureStateMachine(this);
+            OnCreated();
         }
 
         private void OnEnable ()
         {
-            CurrentState.Entry();
+            CurrentState.OnEntry();
+            OnEnabled();
         }
 
         private void OnDisable ()
         {
-            CurrentState.Exit();
+            CurrentState.OnExit();
+            OnDisabled();
         }
 
         private void OnDestroy ()
         {
-            CurrentState.Exit();
-            foreach (var state in States.Values)
+            foreach (var registeredStates in _states.Values)
             {
-                state.Unregistered();
+                registeredStates.State.OnUnregistered();
             }
+            OnDeleted();
         }
 
-        public void RegisterState (TStateBase state)
+        private void Update()
         {
-            if (States.ContainsKey(state.GetType()))
+            CurrentState.OnUpdate();
+
+            foreach (var transition in _current.Transitions)
             {
-                Debug.LogError($"State with given type ({state.GetType()}) is currently registered");
+                if (transition.Check(this))
+                {
+                    break;
+                }
             }
-            else
-            {
-                States.Add(state.GetType(), state);
-                ConfigureState(state);
-                state.Registered();
-            }
+
+            OnUpdate();
+        }
+
+        private void FixedUpdate()
+        {
+            CurrentState.OnFixedUpdate();
+            OnFixedUpdate();
+        }
+
+        private void LateUpdate()
+        {
+            CurrentState.OnLateUpdate();
+            OnLateUpdate();
         }
 
         public void UnregisterState(TStateBase state)
         {
-            if (States.ContainsKey(state.GetType()))
+            if (_states.ContainsKey(state.GetType()))
             {
-                state.Unregistered();
-                States.Remove(state.GetType());
+                state.OnUnregistered();
+                _states.Remove(state.GetType());
             }
             else
             {
                 Debug.LogError($"State with given type ({state.GetType()}) is currently unregistered");
             }
         }
-        public void SetState<T> ()
-            where T : TStateBase
+
+        public override void SetState<T> ()
         {
             SetState(typeof(T));
         }
 
         public override void SetState (Type type)
         {
-            if (States.TryGetValue(type, out TStateBase state))
+            if (_states.TryGetValue(type, out RegisteredState<TStateBase> state))
             {
-                CurrentState = state;
+                CurrentState.OnExit();
+                _current = state;
+                CurrentState.OnEntry();
+                StateChanged?.Invoke();
             }
             else
             {
@@ -98,6 +106,69 @@ namespace HelicopterAttack.StateMachine
             }
         }
 
-        protected virtual void ConfigureState (in TStateBase state) { }
+        public ITransitionRegister RegisterStateAs<T>(TStateBase state) where T : State
+        {
+            var type = typeof(T);
+
+            if (_states.ContainsKey(type))
+            {
+                Debug.LogError($"State with given type ({type}) is currently registered, it will be replaced by new");
+            }
+
+            RegisteredState<TStateBase> createdState = new RegisteredState<TStateBase>(state);
+            _states[type] = createdState;
+            state.OnRegistered();
+
+            return createdState;
+        }
+
+        public ITransitionRegister RegisterDefaultStateAs<T>(TStateBase state) where T : State
+        {
+            if (_current != null)
+            {
+                Debug.LogWarning("The default state is already registered");
+            }
+
+            var registeredState = RegisterStateAs<T>(state);
+            _current = (RegisteredState<TStateBase>)registeredState;
+            return registeredState;
+        }
+
+        protected override void ValidateTransitions()
+        {
+            foreach (var state in _states)
+            {
+                foreach (var transition in state.Value.Transitions)
+                {
+                    if (_states.ContainsKey(transition.To) == false)
+                    {
+                        Debug.LogError("Statemachine transitions validation error");
+                        throw new InvalidOperationException($"The required state with type {transition.To} is not registered in statemachine");
+                    }
+                }
+            }
+            Debug.Log("Statemachine transitions validation success");
+        }
+
+        protected abstract void ConfigureStateMachine(in ISMConfigurator<TStateBase> stateMachine);
+
+        protected virtual void OnCreated() { }
+        protected virtual void OnDeleted() { }
+        protected virtual void OnEnabled() { }
+        protected virtual void OnDisabled() { }
+        protected virtual void OnUpdate() { }
+        protected virtual void OnFixedUpdate() { }
+        protected virtual void OnLateUpdate() { }
+    }
+
+    public abstract class StateMachine : MonoBehaviour, IStateChanger
+    {
+        public abstract event Action StateChanged;
+
+        public abstract IEnumerable<Type> StateTypes { get; }
+
+        public abstract void SetState<T>() where T : State;
+        public abstract void SetState(Type type);
+        protected abstract void ValidateTransitions();
     }
 }

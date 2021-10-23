@@ -18,8 +18,8 @@ namespace HelicopterAttack.Characters
         [SerializeField]
         private float _startHealth;
 
-        public CharacterAttribute MaxHealth { get; private set; } = new CharacterAttribute(0);
-        public CharacterAttribute Health { get; private set; } = new CharacterAttribute(0);
+        public CharacterAttribute MaxHealth { get; private set; } = new CharacterAttribute(1);
+        public CharacterAttribute Health { get; private set; } = new CharacterAttribute(1);
         public bool IsDead { get; private set; }
 
         private void Awake()

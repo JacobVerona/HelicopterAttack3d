@@ -1,26 +1,38 @@
-using HelicopterAttack.Characters.General.Combat;
-using HelicopterAttack.Global;
-using HelicopterAttack.StateMachine;
+﻿using HelicopterAttack.StateMachine;
+using System.Collections;
 using UnityEngine;
 
 namespace HelicopterAttack.Characters.General.AI
 {
-    [DisallowMultipleComponent]
-    public class AIStateMachine : StateMachine<AIState>
+    public abstract class AIStateMachine : StateMachine<AIState>
     {
-        protected void Awake ()
-        {
-            var states = GetComponents<AIState>();
+        [SerializeField]
+        private float _aiUpdateSeconds = 1f;
 
-            for (int i = 0; i < states.Length; i++)
-            {
-                RegisterState(states[i]);
-            }
+        private YieldInstruction _waitTime;
+
+        protected override void OnCreated()
+        {
+            _waitTime = new WaitForSeconds(_aiUpdateSeconds);
         }
 
-        protected override void ConfigureState (in AIState state)
+        protected override void OnEnabled()
         {
-            state.StateMachine = this;
+            StartCoroutine(nameof(AIUpdate));
+        }
+
+        protected override void OnDisabled()
+        {
+            StopCoroutine(nameof(AIUpdate));
+        }
+
+        private IEnumerator AIUpdate()
+        {
+            while (true)
+            {
+                CurrentState.OnAIUpdate();
+                yield return _waitTime;
+            }
         }
     }
 }
