@@ -44,7 +44,7 @@ namespace HelicopterAttack.Characters.Hummer
 
             stateMachine.RegisterStateAs<FollowState>(followState)
                 .WithTransitionTo<PatrolState>(followState.TargetIsntVisibleTransition)
-                .WithTransitionTo<AttackState>(followState.TargetGot);
+                .WithTransitionTo<AttackState>(followState.TargetGotTransition);
         }
 
         private void RegisterAttackState(ISMConfigurator<AIState> stateMachine)

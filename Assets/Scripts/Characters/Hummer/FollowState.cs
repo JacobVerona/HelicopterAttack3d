@@ -26,7 +26,7 @@ namespace HelicopterAttack.Characters.Hummer
             return _vision.IsTargetVisible() == false;
         }
 
-        public bool TargetGot()
+        public bool TargetGotTransition()
         {
             return Vector2.Distance(new Vector2(_agent.transform.position.x, _agent.transform.position.z),
                     new Vector2(_vision.GetTargetPosition().x, _vision.GetTargetPosition().z)) <= _agent.stoppingDistance;

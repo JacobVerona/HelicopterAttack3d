@@ -13,6 +13,14 @@ namespace HelicopterAttack.Characters
 
         public bool IsBinded { get => _target != null; }
 
+        private void Awake()
+        {
+            if (_target != null)
+            {
+                Bind(_target);
+            }
+        }
+
         private void Bind(CharacterHealth target)
         {
             _target = target;
@@ -37,7 +45,7 @@ namespace HelicopterAttack.Characters
 
         private void OnValueChanged(float value)
         {
-            _slider.value = value / _target.MaxHealth.Value;
+            _slider.value = value / _target.MaxHealth.BaseValue;
         }
     }
 }
